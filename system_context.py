@@ -24,45 +24,45 @@ def get_system_context(history_lines=20):
     context["CPU 架构"] = run_cmd("uname -m")
     context["Shell"] = os.environ.get("SHELL", "unknown")
 
-    # 用户 & 路径
-    context["当前用户"] = run_cmd("whoami")
-    context["是否有 sudo 权限"] = "是" if run_cmd("groups").find("sudo") >= 0 else "否"
-    context["主目录"] = str(Path.home())
-    context["当前工作目录"] = os.getcwd()
+    # # 用户 & 路径
+    # context["当前用户"] = run_cmd("whoami")
+    # context["是否有 sudo 权限"] = "是" if run_cmd("groups").find("sudo") >= 0 else "否"
+    # context["主目录"] = str(Path.home())
+    # context["当前工作目录"] = os.getcwd()
+    #
+    # # 包管理器（简单探测）
+    # for pm in ["apt", "yum", "dnf", "pacman", "brew"]:
+    #     if run_cmd(f"which {pm}") != "N/A":
+    #         context["包管理器"] = pm
+    #         break
+    # else:
+    #     context["包管理器"] = "未知"
 
-    # 包管理器（简单探测）
-    for pm in ["apt", "yum", "dnf", "pacman", "brew"]:
-        if run_cmd(f"which {pm}") != "N/A":
-            context["包管理器"] = pm
-            break
-    else:
-        context["包管理器"] = "未知"
+    # # 常用工具版本
+    # tools = {
+    #     "python": "python3 --version",
+    #     "node": "node -v",
+    #     "java": "java -version 2>&1 | head -n 1",
+    #     "docker": "docker --version",
+    #     "git": "git --version"
+    # }
+    # installed = {}
+    # for tool, cmd in tools.items():
+    #     out = run_cmd(cmd)
+    #     if out != "N/A":
+    #         installed[tool] = out
+    # context["已安装工具"] = installed
 
-    # 常用工具版本
-    tools = {
-        "python": "python3 --version",
-        "node": "node -v",
-        "java": "java -version 2>&1 | head -n 1",
-        "docker": "docker --version",
-        "git": "git --version"
-    }
-    installed = {}
-    for tool, cmd in tools.items():
-        out = run_cmd(cmd)
-        if out != "N/A":
-            installed[tool] = out
-    context["已安装工具"] = installed
-
-    # 最近命令历史
-    history_file = Path.home() / ".bash_history"
-    history = []
-    if history_file.exists():
-        try:
-            lines = history_file.read_text(encoding="utf-8").splitlines()
-            history = lines[-history_lines:]
-        except Exception:
-            history = []
-    context["最近命令历史"] = history
+    # # 最近命令历史
+    # history_file = Path.home() / ".bash_history"
+    # history = []
+    # if history_file.exists():
+    #     try:
+    #         lines = history_file.read_text(encoding="utf-8").splitlines()
+    #         history = lines[-history_lines:]
+    #     except Exception:
+    #         history = []
+    # context["最近命令历史"] = history
 
     return context
 
