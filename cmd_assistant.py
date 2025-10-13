@@ -2,7 +2,6 @@ import os
 import sys
 import subprocess
 import logging
-
 from config import api_key
 from system_context import get_system_context, format_context
 from langchain_openai import ChatOpenAI
