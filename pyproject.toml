@@ -8,5 +8,6 @@ dependencies = [
     "httpx[socks]>=0.28.1",
     "langchain-openai>=0.3.35",
     "pre-commit>=4.3.0",
+    "pyinstaller>=6.16.0",
     "ruff>=0.14.0",
 ]
